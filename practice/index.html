@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="parent">
+      Parent
+      <button id="child">Click Me</button>
+    </div>
+
+    <script>
+      /* Event Bubbling Parent To Child */
+      const parent = document.getElementById("parent");
+      const child = document.getElementById("child");
+
+      parent.addEventListener("click", () => {
+        console.log("Parent clicked");
+      });
+
+      child.addEventListener("click", () => {
+        console.log("Child clicked");
+      });
+
+      child.addEventListener("click", () => {
+        event.stopPropagation();
+        console.log("Child clicked");
+      });
+
+      /* Event Capturing Child To Parent */
+      // Default event flow mein bubbling hoti hai. Capturing explicitly enable kar sakte ho:
+      parent.addEventListener(
+        "click",
+        () => {
+          console.log("Parent");
+        },
+        true,
+      );
+
+      child.addEventListener("click", () => {
+        console.log("Child");
+      });
+    </script>
+  </body>
+</html>
